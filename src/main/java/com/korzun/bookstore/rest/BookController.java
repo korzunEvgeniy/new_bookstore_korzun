@@ -44,7 +44,7 @@ public class BookController {
     }
 
     @GetMapping("/count")
-    public void countAll() {
-        bookService.countAll();
+    public Long countAll() {
+        return bookService.countAll();
     }
 }

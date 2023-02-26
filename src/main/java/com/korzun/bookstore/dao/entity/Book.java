@@ -43,6 +43,7 @@ public class Book {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.pages = pages;
         this.cover = cover;
         this.price = price;
     }

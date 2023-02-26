@@ -33,8 +33,7 @@ public class User {
     @Column(name = "deleted")
     private boolean deleted;
 
-    public User(Long id, String lastName, String email, String password, Role role) {
-        this.id = id;
+    public User(String lastName, String email, String password, Role role) {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
