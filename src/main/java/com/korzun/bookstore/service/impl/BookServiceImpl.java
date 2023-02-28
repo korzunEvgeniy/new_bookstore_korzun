@@ -8,7 +8,6 @@ import com.korzun.bookstore.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -80,12 +79,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getByIsbn(String isbn) {
-//        Book book = bookRepository.findByIsbn(isbn);
-//        if (book == null) {
-//            throw new RuntimeException("No book with isbn " + isbn);
-//        } else
-//            return bookMapper.mapToDto(book);
-
         return bookRepository.findAll()
                 .stream()
                 .filter(book -> !book.isDeleted())
@@ -96,14 +89,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getByAuthor(String author) {
-//        List<Book> books = bookRepository.findByAuthor(author);
-//        List<BookDto> bookDtos = new ArrayList<>();
-//        for (Book book : books) {
-//            BookDto bookDto = bookMapper.mapToDto(book);
-//            bookDtos.add(bookDto);
-//        }
-//        return bookDtos;
-
         return bookRepository.findAll()
                 .stream()
                 .filter(book -> !book.isDeleted())

@@ -47,4 +47,14 @@ public class BookController {
     public Long countAll() {
         return bookService.countAll();
     }
+
+    @GetMapping("/isbn/{isbn}")
+    public BookDto getByIsbn(@PathVariable String isbn) {
+        return bookService.getByIsbn(isbn);
+    }
+
+    @GetMapping("/author/{author}")
+    public List<BookDto> getByAuthor(@PathVariable String author) {
+        return bookService.getByAuthor(author);
+    }
 }
