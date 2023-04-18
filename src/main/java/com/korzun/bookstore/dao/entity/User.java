@@ -133,7 +133,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", order=" + order +
-                ", deleted=" + deleted +
                 '}';
     }
 }

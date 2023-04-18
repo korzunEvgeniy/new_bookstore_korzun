@@ -30,6 +30,17 @@ public class OrderItem {
     @Column(name = "deleted")
     private boolean deleted;
 
+    public OrderItem(Long id, Long orderId, Book book, Integer quantity, BigDecimal price) {
+        this.id = id;
+        this.orderId = orderId;
+        this.book = book;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public OrderItem() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -104,7 +115,6 @@ public class OrderItem {
                 ", book=" + book +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", deleted=" + deleted +
                 '}';
     }
 }

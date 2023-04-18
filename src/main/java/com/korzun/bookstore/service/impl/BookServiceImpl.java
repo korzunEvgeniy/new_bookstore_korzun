@@ -44,8 +44,9 @@ public class BookServiceImpl implements BookService {
         Book existing = bookRepository.findByIsbn(bookDto.getIsbn());
         if (existing != null) {
             throw new RuntimeException("Book with ISBN " + bookDto.getIsbn() + " exist");
-        } else
+        } else {
             return bookMapper.mapToDto(bookRepository.save(bookMapper.mapToEntity(bookDto)));
+        }
     }
 
     @Override

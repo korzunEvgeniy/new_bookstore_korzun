@@ -22,13 +22,13 @@ public class BookDto {
         this.price = price;
     }
 
+    public BookDto() {
+    }
+
     public enum Cover {
         HARD,
         SOFT,
         GIFT
-    }
-
-    public BookDto() {
     }
 
     public Long getId() {

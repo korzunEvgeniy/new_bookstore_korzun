@@ -152,8 +152,6 @@ public class Book {
                 ", pages=" + pages +
                 ", cover=" + cover +
                 ", price=" + price +
-                ", items=" + items +
-                ", deleted=" + deleted +
                 '}';
     }
 }
