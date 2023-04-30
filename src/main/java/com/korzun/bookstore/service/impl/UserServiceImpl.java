@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,27 +52,51 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(UserDto entity) {
-        return null;
+    public UserDto update(UserDto userDto) {
+        User expected = userRepository.findById(userDto.getId()).filter(u -> !u.isDeleted())
+                .orElseThrow(() -> new RuntimeException("No user with id " + userDto.getId()));
+        if (!Objects.equals(expected.getEmail(), userDto.getEmail())) {
+            throw new RuntimeException("User with email " + userDto.getEmail() + " is not exist");
+        } else {
+            return userMapper.mapToDto(userRepository.save(userMapper.mapToEntity(userDto)));
+        }
     }
 
     @Override
-    public void delete(Long key) {
-
+    public void delete(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user with id " + id));
+        if (!user.isDeleted()) {
+            user.setDeleted(true);
+            userRepository.save(user);
+        }
     }
 
     @Override
     public Long countAll() {
-        return null;
+        return userRepository.findAll()
+                .stream()
+                .filter(u -> !u.isDeleted())
+                .count();
     }
 
     @Override
     public List<UserDto> getByLastName(String lastName) {
-        return null;
+        return userRepository.findAll()
+                .stream()
+                .filter(u -> !u.isDeleted())
+                .filter(u -> u.getLastName().equals(lastName))
+                .map(userMapper::mapToDto)
+                .toList();
     }
 
     @Override
     public UserDto getByEmail(String email) {
-        return null;
+        return userRepository.findAll()
+                .stream()
+                .filter(u -> !u.isDeleted())
+                .filter(u -> u.getEmail().equals(email))
+                .map(userMapper::mapToDto)
+                .findAny().orElseThrow(() -> new RuntimeException("No user with email " + email));
     }
 }

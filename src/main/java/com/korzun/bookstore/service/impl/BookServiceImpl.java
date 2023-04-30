@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getAll() {
         return bookRepository.findAll()
                 .stream()
-                .filter(book -> !book.isDeleted())
+                .filter(b -> !b.isDeleted())
                 .map(bookMapper::mapToDto)
                 .toList();
     }
@@ -74,7 +74,7 @@ public class BookServiceImpl implements BookService {
     public Long countAll() {
         return bookRepository.findAll()
                 .stream()
-                .filter(book -> !book.isDeleted())
+                .filter(b -> !b.isDeleted())
                 .count();
     }
 
@@ -82,8 +82,8 @@ public class BookServiceImpl implements BookService {
     public BookDto getByIsbn(String isbn) {
         return bookRepository.findAll()
                 .stream()
-                .filter(book -> !book.isDeleted())
-                .filter(book -> book.getIsbn().equals(isbn))
+                .filter(b -> !b.isDeleted())
+                .filter(b -> b.getIsbn().equals(isbn))
                 .map(bookMapper::mapToDto)
                 .findAny().orElseThrow(() -> new RuntimeException("No book with isbn " + isbn));
     }
@@ -92,8 +92,8 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getByAuthor(String author) {
         return bookRepository.findAll()
                 .stream()
-                .filter(book -> !book.isDeleted())
-                .filter(book -> book.getAuthor().equals(author))
+                .filter(b -> !b.isDeleted())
+                .filter(b -> b.getAuthor().equals(author))
                 .map(bookMapper::mapToDto)
                 .toList();
     }
